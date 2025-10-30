@@ -1,0 +1,750 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>DOBA</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/gijgo.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/slicknav.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+    
+    <!-- Mobile Responsive Styles for Reservation Buttons -->
+    <style>
+        .reservation-buttons {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .reservation-buttons .btn {
+            display: inline-block !important;
+            min-width: 150px;
+            text-align: center;
+            white-space: nowrap;
+            background-color: #FFD700 !important;
+            color: #000 !important;
+            border: 1px solid #FFD700 !important;
+            text-decoration: none !important;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            visibility: visible !important;
+            opacity: 1 !important;
+            position: relative;
+            z-index: 999;
+        }
+        
+        .reservation-buttons .btn:hover {
+            background-color: #FFC107 !important;
+            border-color: #FFC107 !important;
+            color: #000 !important;
+            text-decoration: none !important;
+            transform: translateY(-2px);
+        }
+        
+        /* Medium mobile/tablet styles */
+        @media (max-width: 991px) and (min-width: 768px) {
+            .reservation-buttons {
+                flex-direction: row !important;
+                align-items: center;
+                justify-content: center;
+                margin: 15px 0 !important;
+                display: flex !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
+            
+            .reservation-buttons .btn {
+                width: auto !important;
+                min-width: 180px;
+                margin: 5px 10px !important;
+                padding: 12px 20px !important;
+                font-size: 14px !important;
+                display: inline-block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
+        }
+        
+        /* Small mobile styles */
+        @media (max-width: 767px) {
+            .reservation-buttons {
+                flex-direction: column !important;
+                align-items: center;
+                margin: 15px 0 !important;
+                display: flex !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
+            
+            .reservation-buttons .btn {
+                width: 100% !important;
+                max-width: 280px;
+                margin: 5px 0 !important;
+                padding: 12px 20px !important;
+                font-size: 14px !important;
+                display: inline-block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .reservation-buttons .btn {
+                padding: 10px 15px !important;
+                font-size: 13px !important;
+                display: inline-block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
+        }
+        
+        /* Force visibility on all screen sizes */
+        @media screen and (max-width: 9999px) {
+            .reservation-buttons {
+                display: flex !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
+            
+            .reservation-buttons .btn {
+                display: inline-block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
+        }
+        
+        /* Hero Overlay with Glowing Buttons */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        
+        .hero-buttons-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            animation: fadeInUp 1s ease-out;
+            padding: 40px 60px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .hero-btn {
+            position: relative;
+            display: inline-block;
+            padding: 20px 40px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4);
+            border: 2px solid #FFD700;
+        }
+        
+        .hero-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.8), 0 0 50px rgba(255, 215, 0, 0.6);
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .btn-text {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .btn-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 50px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+        
+        .hero-btn:hover .btn-glow {
+            opacity: 0.3;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Mobile responsiveness for hero buttons */
+        @media (max-width: 768px) {
+            .hero-buttons-container {
+                gap: 20px;
+                padding: 0 20px;
+            }
+            
+            .hero-btn {
+                padding: 15px 30px;
+                font-size: 16px;
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-btn {
+                padding: 12px 25px;
+                font-size: 14px;
+            }
+        }
+        
+        /* About Section Buttons */
+        .about-btn:hover {
+            background-color: #a9852d !important;
+            border-color: #FFD700 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            color: #672a2a !important;
+            text-decoration: none !important;
+        }
+        
+        @media (max-width: 768px) {
+            .about-buttons-container {
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+            
+            .about-btn {
+                width: 100% !important;
+                max-width: 250px !important;
+                text-align: center !important;
+            }
+        }
+        
+        /* Header background - no blur */
+        .header-area {
+            background: rgba(0, 0, 0, 0.3) !important;
+            backdrop-filter: none !important;
+        }
+        
+        /* Mobile menu container styling */
+        .mobile_menu {
+            position: relative !important;
+            z-index: 9999 !important;
+        }
+        
+        /* Ensure SlickNav menu is properly styled - fix transparent menu */
+        .slicknav_menu {
+            background: rgba(0, 0, 0, 0.95) !important;
+            backdrop-filter: none !important;
+            display: block !important;
+            position: relative !important;
+            z-index: 9999 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        .slicknav_btn {
+            background: transparent !important;
+            cursor: pointer !important;
+        }
+        
+        .slicknav_icon {
+            background: white !important;
+            height: 4px !important;
+            width: 30px !important;
+            border-radius: 2px !important;
+        }
+        
+        .slicknav_icon:before,
+        .slicknav_icon:after {
+            background: white !important;
+            height: 4px !important;
+            width: 30px !important;
+            border-radius: 2px !important;
+        }
+        
+        .slicknav_menu .slicknav_menutxt {
+            color: white !important;
+            font-weight: bold !important;
+        }
+        
+        .slicknav_menu .slicknav_nav {
+            background: rgba(0, 0, 0, 0.95) !important;
+            backdrop-filter: none !important;
+        }
+        
+        .slicknav_menu .slicknav_nav a {
+            color: white !important;
+            font-weight: 500 !important;
+            padding: 15px 20px !important;
+            display: block !important;
+            background: rgba(0, 0, 0, 0.8) !important;
+            margin: 2px 0 !important;
+            border-radius: 5px !important;
+            text-decoration: none !important;
+        }
+        
+        .slicknav_menu .slicknav_nav a:hover {
+            background: rgba(255, 215, 0, 0.2) !important;
+            color: #FFD700 !important;
+        }
+        
+        /* Logo positioning - moved away from far left */
+        .logo {
+            text-align: left !important;
+            padding-left: 20px !important;
+            margin-left: 0 !important;
+        }
+        
+        .col-xl-3.col-lg-3 {
+            text-align: left !important;
+            padding-left: 0 !important;
+        }
+        
+        /* Header buttons styling - desktop only */
+        .buy_tkt .book_btn {
+            display: flex !important;
+            gap: 8px !important;
+            justify-content: flex-end !important;
+            align-items: center !important;
+        }
+        
+        .buy_tkt .book_btn a {
+            font-size: 0.75em !important;
+            padding: 6px 12px !important;
+            background-color: #bb9a35 !important; /* warm gold-brown */
+            color: #6d412d !important; /* deep brown text */
+            border: 1px solid #FFD700 !important; /* subtle gold edge */
+            border-radius: 4px !important;
+            text-decoration: none !important;
+            font-weight: bold !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .buy_tkt .book_btn a:hover {
+            background-color: #a9852d !important; /* slightly darker on hover */
+            border-color: #FFD700 !important;
+            color: #6d412d !important;
+            text-decoration: none !important;
+            transform: translateY(-1px) !important;
+        }
+        
+        /* Ensure buttons are hidden on mobile */
+        @media (max-width: 991px) {
+            .buy_tkt .book_btn {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-3 col-lg-3">
+                                <div class="logo" style="margin-left: 0 !important; padding-left: 20px !important; text-align: left !important;">
+                                    <a href="index.html" style="display: inline-block;">
+                                        <img src="img/doblogo.png" alt="" style="width: 80px !important; height: 80px !important; max-width: 80px !important; max-height: 80px !important;">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6">
+                                <!-- Desktop navigation removed - links only in mobile menu -->
+                            </div>
+                            <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                                <div class="buy_tkt">
+                                    <div class="book_btn d-none d-lg-block" style="display: flex; gap: 8px;">
+                                        <a href="tickets.html" style="font-size: 0.75em; padding: 6px 12px; background-color: #FFD700; color: #000; border: 1px solid #FFD700; border-radius: 4px;">Table Reservations</a>
+                                        <a href="sponsorship.html" style="font-size: 0.75em; padding: 6px 12px; background-color: #FFD700; color: #000; border: 1px solid #FFD700; border-radius: 4px;">Sponsorship</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="tickets.html">Table Reservations</a></li>
+                                            <li><a href="sponsorship.html">Sponsorship</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+    <!-- slider_area_start -->
+    <div class="slider_area">
+        <div class="single_slider  d-flex align-items-center slider_bg_1">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-xl-12">
+                        <div class="slider_text text-center">
+                            <div class="shape_1 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".2s">
+                                <img src="img/shape/shape_1.svg" alt="">
+                            </div>
+                            <div class="shape_2 wow fadeInDown" data-wow-duration="1s" data-wow-delay=".2s">
+                                <img src="img/shape/shape_2.svg" alt="">
+                            </div>
+                            <!-- <span class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">2025</span>
+                            <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">Dove Bliss Awards</h3>
+                            <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">DOBA 2025</p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- slider_area_end -->
+
+
+    <!-- about_area_start  -->
+    <div class="about_area black_bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="section_title text-center mb-80">
+                        <h3 class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s" >About DOBA 2025</h3>
+                        <p class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".4s" >The Dove Bliss Award 2025 (DOBA2025), presented by Dove Bliss Company—a dynamic media and events firm based in Abuja and branch office in Abakaliki, Ebonyi State, Nigeria—stands as a beacon of recognition for merit-driven achievements. As the biggest award event in the history of Ebonyi State with proven track records since its inception in 2019, DOBA has consistently honored exemplary individuals while fostering youth empowerment and community development.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-7 col-md-6">
+                    <div class="about_thumb">
+                        <div class="shap_3  wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">
+                            <img src="img/shape/shape_3.svg" alt="">
+                        </div>
+                        <div class="thumb_inner  wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
+                            <img src="img/about/prevdoba12.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    <div class="about_info pl-68">
+                        <h4 class=" wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">Dove Bliss Award 2025: The Excellent Path </h4>
+                        <p  class=" wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">Held annually at the prestigious International Conference Centre in Abakaliki, this event has evolved into a cornerstone platform for celebrating men and women of impeccable reputation and impactful contributions across technology, business, leadership and governance, education, entrepreneurship, and entertainment. Notably, DOBA2025 is NOT A VOTING CATEGORY —it is purely merit-based, ensuring awards are determined by a rigorous, impartial evaluation of achievements rather than public opinion or influence, reinforcing its commitment to integrity and excellence.</p>
+                        <div class="about-buttons-container wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".7s" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                            <a href="tickets.html" class="about-btn" style="display: inline-block; background-color: #a07e1a; color: #672a2a; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; border: 2px solid #FFD700; transition: all 0.3s ease;">Table Reservations</a>
+                            <a href="sponsorship.html" class="about-btn" style="display: inline-block; background-color: #a07e1a; color: #672a2a; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; border: 2px solid #FFD700; transition: all 0.3s ease;">Sponsorship</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- about_area_end  -->
+
+    <div class="program_details_area detials_bg_1 overlay2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section_title text-center mb-80  wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">
+                        <h3>Award Categories</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="program_detail_wrap">
+                        <div class="single_propram">
+                            <div class="inner_wrap">
+                                <div class="circle_img"></div>
+                                <div class="porgram_top">
+                                    <span class=" wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">Leadership and Governance</span>
+                                    <h4 class=" wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s"></h4>
+                                </div>
+                                <div class="thumb wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">
+                                    <img src="img/program_details/prevdoba4.jpg" alt="">
+                                </div>
+                                <h4 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s"></h4>
+                            </div>
+                        </div>
+                        <div class="single_propram">
+                            <div class="inner_wrap">
+                                <div class="circle_img"></div>
+                                <div class="porgram_top">
+                                    <span class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">Business</span>
+                                    <h4 class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".4s"></h4>
+                                </div>
+                                <div class="thumb wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
+                                    <img src="img/program_details/prevdoba9.jpg" alt="">
+                                </div>
+                                <h4 class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s"></h4>
+                            </div>
+                        </div>
+                        <div class="single_propram">
+                            <div class="inner_wrap">
+                                <div class="circle_img"></div>
+                                <div class="porgram_top">
+                                    <span class=" wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">Technology</span>
+                                    <h4 class=" wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s"></h4>
+                                </div>
+                                <div class="thumb  wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">
+                                    <img src="img/program_details/prevdoba12.jpg" alt="">
+                                </div>
+                                <h4 class=" wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s"></h4>
+                            </div>
+                        </div>
+                        <div class="single_propram">
+                            <div class="inner_wrap">
+                                <div class="circle_img"></div>
+                                <div class="porgram_top">
+                                    <span class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">Education</span>
+                                    <h4 class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".4s"></h4>
+                                </div>
+                                <div class="thumb wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
+                                    <img src="img/program_details/prevdoba11.jpg" alt="">
+                                </div>
+                                <h4 class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s"></h4>
+                            </div>
+                        </div>
+                        <div class="single_propram">
+                            <div class="inner_wrap">
+                                <div class="circle_img"></div>
+                                <div class="porgram_top">
+                                    <span class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">Entertainment</span>
+                                    <h4 class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".4s"></h4>
+                                </div>
+                                <div class="thumb wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
+                                    <img src="img/program_details/prevdoba13.jpg" alt="">
+                                </div>
+                                <h4 class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s"></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    <!-- brand_area_start  -->
+    <div class="brand_area black_bg" id="reservations">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section_title text-center mb-80">
+                        <h4 class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">Table Reservations</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="brand_wrap">
+                        <div class="brand_active owl-carousel">
+                            <div class="single_brand text-center">
+                                <img src="img/brand/diamond.png" alt="">
+                            </div>
+                            <div class="single_brand text-center">
+                                <img src="img/brand/gold.png" alt="">
+                            </div>
+                            <div class="single_brand text-center">
+                                <img src="img/brand/platinum.png" alt="">
+                            </div>
+                            <div class="single_brand text-center">
+                                <img src="img/brand/gathering.png" alt="">
+                            </div>
+                            <div class="single_brand text-center">
+                                <img src="img/brand/diamond.png" alt="">
+                            </div>
+                            <div class="single_brand text-center">
+                                <img src="img/brand/gold.png" alt="">
+                            </div>
+                            <div class="single_brand text-center">
+                                <img src="img/brand/gathering.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- brand_area_end  -->
+    <!-- footer_start  -->
+    <footer class="footer" id="footer">
+        <div class="footer_top">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-8">
+                        <div class="footer_widget">
+                            <div class="address_details text-center">
+                                <h4 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">29 DEC, 2025</h4>
+                                <h3 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">Real Exclusive Palace, Abakaliki, Ebonyi State</h3>
+                                <p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">Make your reservations for either sponsorship or tickets by clicking the buttons below:</p>
+                                
+                                <!-- SIMPLE BUTTONS - NO COMPLEX STYLING -->
+                                <div style="text-align: center; margin: 20px 0;">
+                                    <a href="tickets.html" class="about-btn" style="display: inline-block; background-color: #a07e1a; color: #672a2a; padding: 15px 25px; margin: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; border: 2px solid #FFD700;">Table Reservations</a>
+                                    <br>
+                                    <a href="sponsorship.html" class="about-btn" style="display: inline-block; background-color: #a07e1a; color: #672a2a; padding: 15px 25px; margin: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; border: 2px solid #FFD700;">Sponsorship</a>
+                                </div>
+                                
+                                <p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".7s">For additional information, please contact us on:</p>
+                                <p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s">08136027018, 07034512150</p>
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <p class="copy_right text-center wow fadeInDown" data-wow-duration="1s" data-wow-delay=".5s">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://www.mybizpush.com/" target="_blank">myBizPushSolutions</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer_end  -->
+
+    <!-- JS here -->
+    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/ajax-form.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/scrollIt.js"></script>
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/gijgo.min.js"></script>
+    <script src="js/nice-select.min.js"></script>
+    <script src="js/jquery.slicknav.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/tilt.jquery.js"></script>
+    <script src="js/plugins.js"></script>
+
+
+
+    <!--contact js-->
+    <script src="js/contact.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/mail-script.js"></script>
+
+
+    <script src="js/main.js"></script>
+    
+    <!-- Initialize SlickNav Mobile Menu -->
+    <script>
+        $(document).ready(function(){
+            // Ensure the navigation exists before initializing SlickNav
+            if ($('#navigation').length > 0) {
+                $('#navigation').slicknav({
+                    prependTo:'.mobile_menu',
+                    label: 'MENU',
+                    closeOnClick: true,
+                    allowParentLinks: false,
+                    duplicate: false,
+                    closedSymbol: '&#9658;',
+                    openedSymbol: '&#9660;',
+                    brand: '',
+                    beforeOpen: function(trigger) {
+                        console.log('Menu opening');
+                    },
+                    beforeClose: function(trigger) {
+                        console.log('Menu closing');
+                    }
+                });
+            } else {
+                console.log('Navigation element not found');
+            }
+        });
+    </script>
+</body>
+
+</html>
