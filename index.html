@@ -274,27 +274,28 @@
         .hero-vote-btn {
             position: relative;
             display: inline-block;
-            padding: 25px 50px;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            color: #000;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #D4AF37, #C9A961, #B8860B);
+            color: #1a1a1a !important;
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 18px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             transition: all 0.3s ease;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.7), 0 0 50px rgba(255, 215, 0, 0.5);
-            border: 3px solid #FFD700;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.4);
+            border: 2px solid #D4AF37;
             animation: votePulse 2s infinite;
         }
         
         .hero-vote-btn:hover {
-            transform: translateY(-8px) scale(1.08);
-            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.9), 0 0 80px rgba(255, 215, 0, 0.7);
-            color: #000;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.6);
+            color: #000 !important;
             text-decoration: none;
+            background: linear-gradient(135deg, #FFD700, #D4AF37, #C9A961);
         }
         
         .hero-vote-btn .btn-text {
@@ -303,18 +304,20 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            color: #1a1a1a !important;
         }
         
         .hero-vote-btn .fa-heart {
             animation: heartBeat 1.5s infinite;
+            color: #1a1a1a !important;
         }
         
         @keyframes votePulse {
             0%, 100% {
-                box-shadow: 0 10px 40px rgba(255, 215, 0, 0.7), 0 0 50px rgba(255, 215, 0, 0.5);
+                box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.4);
             }
             50% {
-                box-shadow: 0 15px 50px rgba(255, 215, 0, 0.9), 0 0 70px rgba(255, 215, 0, 0.7);
+                box-shadow: 0 12px 35px rgba(212, 175, 55, 0.8), 0 0 55px rgba(212, 175, 55, 0.6);
             }
         }
         
@@ -333,7 +336,7 @@
         /* Mobile responsive for voting button */
         @media (max-width: 768px) {
             .hero-vote-btn {
-                padding: 20px 35px;
+                padding: 16px 32px;
                 font-size: 16px;
                 letter-spacing: 1px;
             }
@@ -341,15 +344,16 @@
         
         @media (max-width: 480px) {
             .hero-vote-btn {
-                padding: 15px 25px;
+                padding: 14px 25px;
                 font-size: 14px;
                 width: 90%;
                 text-align: center;
             }
             
             .hero-vote-btn .btn-text {
-                flex-direction: column;
-                gap: 5px;
+                flex-direction: row;
+                gap: 8px;
+                justify-content: center;
             }
         }
         
@@ -532,10 +536,9 @@
                             </div>
                             <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                                 <div class="buy_tkt">
-                                    <div class="book_btn d-none d-lg-block" style="display: flex; gap: 8px;">
-                                        <a href="voting.html" style="font-size: 0.75em; padding: 6px 12px; background-color: #FF6B6B; color: #fff; border: 1px solid #FF6B6B; border-radius: 4px; font-weight: bold;">🗳️ Vote Now</a>
-                                        <a href="tickets.html" style="font-size: 0.75em; padding: 6px 12px; background-color: #FFD700; color: #000; border: 1px solid #FFD700; border-radius: 4px;">Table Reservations</a>
-                                        <a href="sponsorship.html" style="font-size: 0.75em; padding: 6px 12px; background-color: #FFD700; color: #000; border: 1px solid #FFD700; border-radius: 4px;">Sponsorship</a>
+                                    <div class="book_btn d-none d-lg-block" style="display: flex !important; gap: 8px !important;">
+                                        <a href="tickets.html" style="font-size: 0.75em !important; padding: 6px 12px !important; background-color: #FFD700 !important; color: #000 !important; border: 1px solid #FFD700 !important; border-radius: 4px !important;">Table Reservations</a>
+                                        <a href="sponsorship.html" style="font-size: 0.75em !important; padding: 6px 12px !important; background-color: #FFD700 !important; color: #000 !important; border: 1px solid #FFD700 !important; border-radius: 4px !important;">Sponsorship</a>
                                     </div>
                                 </div>
                             </div>
@@ -543,7 +546,6 @@
                                 <div class="mobile_menu d-block d-lg-none">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="voting.html">🗳️ Vote Now</a></li>
                                             <li><a href="tickets.html">Table Reservations</a></li>
                                             <li><a href="sponsorship.html">Sponsorship</a></li>
                                         </ul>
