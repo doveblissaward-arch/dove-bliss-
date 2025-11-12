@@ -1,0 +1,630 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>DOBA 2025 - Vote for Your Favourite</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/gijgo.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/slicknav.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Mobile menu styling */
+        .mobile_menu {
+            position: relative !important;
+            z-index: 9999 !important;
+        }
+
+        .slicknav_menu {
+            background: rgba(0, 0, 0, 0.95) !important;
+        }
+
+        .slicknav_menu .slicknav_nav a {
+            background: #ffad00b5 !important;
+            color: white !important;
+        }
+
+        /* Voting page styles */
+        .voting_area {
+            background: #0a0a0a;
+            padding: 80px 0;
+            min-height: 100vh;
+        }
+
+        .category_section {
+            margin-bottom: 60px;
+        }
+
+        .category_title {
+            text-align: center;
+            color: #FFD700;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .contestant_card {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 2px solid #2a2a2a;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contestant_card:hover {
+            border-color: #FFD700;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .contestant_name {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .vote_stats {
+            margin: 20px 0;
+        }
+
+        .progress_bar {
+            background: #2a2a2a;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .progress_fill {
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .vote_info {
+            display: flex;
+            justify-content: space-between;
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .vote_btn {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .vote_btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .loading_spinner {
+            text-align: center;
+            padding: 40px;
+            color: #FFD700;
+        }
+
+        .refresh_btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #FFD700;
+            color: #000;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+            z-index: 1000;
+        }
+
+        .refresh_btn:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .category_title {
+                font-size: 24px;
+            }
+
+            .contestant_name {
+                font-size: 20px;
+            }
+
+            .refresh_btn {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+            }
+        }
+
+        /* Page-specific override - but exclude vote buttons */
+        a:not(.vote_btn),
+        button:not(.vote_btn):not(.refresh_btn) {
+            color: #1f1f1f14 !important;
+            outline: medium none !important;
+        }
+
+        a:hover:not(.vote_btn),
+        a:focus:not(.vote_btn),
+        a:active:not(.vote_btn),
+        button:hover:not(.vote_btn):not(.refresh_btn),
+        button:focus:not(.vote_btn):not(.refresh_btn) {
+            color: #1f1f1f14 !important;
+            background-color: transparent !important;
+            border-color: transparent !important;
+            text-decoration: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Ensure vote button text is always visible */
+        .vote_btn,
+        .vote_btn:hover,
+        .vote_btn:focus,
+        .vote_btn:active {
+            color: #000 !important;
+            background: linear-gradient(135deg, #FFD700, #FFA500) !important;
+            border: none !important;
+        }
+
+        .refresh_btn,
+        .refresh_btn:hover,
+        .refresh_btn:focus {
+            color: #000 !important;
+            background: #FFD700 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-3 col-lg-3">
+                                <div class="logo"
+                                    style="margin-left: 0 !important; padding-left: 20px !important; text-align: left !important;">
+                                    <a href="index.html" style="display: inline-block;">
+                                        <img src="img/doblogo.png" alt=""
+                                            style="width: 80px !important; height: 80px !important;">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6">
+                                <div class="main-menu d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="voting.html">Vote Now</a></li>
+                                            <li><a href="tickets.html">Table Reservations</a></li>
+                                            <li><a href="sponsorship.html">Sponsorship</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="voting.html">Vote Now</a></li>
+                                            <li><a href="tickets.html">Table Reservations</a></li>
+                                            <li><a href="sponsorship.html">Sponsorship</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+    <!-- voting_area_start -->
+    <div class="voting_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="section_title text-center mb-80">
+                        <h3 class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s" style="color: #FFD700;">
+                            Vote for Your Favourite Contestant</h3>
+                        <p class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".4s" style="color: #999;">Each
+                            vote costs ₦100. You can vote multiple times for your favourite contestant.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div id="loadingSpinner" class="loading_spinner">
+                <i class="fa fa-spinner fa-spin fa-3x"></i>
+                <p>Loading voting data...</p>
+            </div>
+
+            <!-- Voting Categories Container -->
+            <div id="votingContainer" style="display: none;">
+                <!-- Categories will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+    <!-- voting_area_end -->
+
+    <!-- Refresh Button -->
+    <button class="refresh_btn" onclick="loadVotingData()">
+        <i class="fa fa-refresh"></i> Refresh
+    </button>
+
+    <!-- footer_start -->
+    <footer class="footer" id="footer">
+        <div class="footer_top">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-8">
+                        <div class="footer_widget">
+                            <div class="address_details text-center">
+                                <h4 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">29 DEC, 2025</h4>
+                                <h3 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">Real Exclusive
+                                    Palace, Abakaliki, Ebonyi State</h3>
+                                <p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">For more
+                                    information, contact: 08136027018, 07034512150</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <p class="copy_right text-center wow fadeInDown" data-wow-duration="1s" data-wow-delay=".5s">
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> Made with <i
+                                class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://www.mybizpush.com/"
+                                target="_blank">myBizPushSolutions</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer_end -->
+
+    <!-- JS here -->
+    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/ajax-form.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/scrollIt.js"></script>
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/gijgo.min.js"></script>
+    <script src="js/nice-select.min.js"></script>
+    <script src="js/jquery.slicknav.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/tilt.jquery.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Paystack Inline JS -->
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+
+    <!-- Voting Logic -->
+    <script>
+        // CONFIGURATION
+        const PAYSTACK_PUBLIC_KEY = 'pk_live_7cd172d17e2d682e55c575703';
+        const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQiYaNFl4xpHbXfZsIZNSaZoxCSQEZY76NZs2OH40mDUdQ0RdVJ34AdSwDsbChUI-P6vAavV-BsxI_Y/pub?output=csv';
+
+        // Dummy contestants data - organized by category
+        const contestantsData = {
+            'Leadership and Governance': [
+                { name: 'Adaeze Okonkwo', id: 'lg_1' },
+                { name: 'Chukwudi Nnamani', id: 'lg_2' },
+                { name: 'Ngozi Eze', id: 'lg_3' },
+                { name: 'Emeka Okoro', id: 'lg_4' }
+            ],
+            'Business': [
+                { name: 'Chioma Adeleke', id: 'bus_1' },
+                { name: 'Oluwaseun Balogun', id: 'bus_2' },
+                { name: 'Amaka Okafor', id: 'bus_3' },
+                { name: 'Tunde Williams', id: 'bus_4' }
+            ],
+            'Technology': [
+                { name: 'Kelechi Obi', id: 'tech_1' },
+                { name: 'Funmi Adeyemi', id: 'tech_2' },
+                { name: 'Chinedu Agu', id: 'tech_3' },
+                { name: 'Blessing Nwankwo', id: 'tech_4' }
+            ],
+            'Education': [
+                { name: 'Dr. Ifeanyi Okeke', id: 'edu_1' },
+                { name: 'Prof. Amina Yusuf', id: 'edu_2' },
+                { name: 'Mrs. Patience Onyeka', id: 'edu_3' },
+                { name: 'Mr. Samuel Okafor', id: 'edu_4' }
+            ],
+            'Entertainment': [
+                { name: 'DJ Sparkle', id: 'ent_1' },
+                { name: 'MC Vibez', id: 'ent_2' },
+                { name: 'Songbird Chioma', id: 'ent_3' },
+                { name: 'Comedian Emeka', id: 'ent_4' }
+            ]
+        };
+
+        // Store voting data
+        let votingData = {};
+
+        // Initialize voting data structure
+        function initializeVotingData() {
+            Object.keys(contestantsData).forEach(category => {
+                votingData[category] = {};
+                contestantsData[category].forEach(contestant => {
+                    votingData[category][contestant.name] = {
+                        votes: 0,
+                        amount: 0,
+                        percentage: 0
+                    };
+                });
+            });
+        }
+
+        // Load voting data from Google Sheets
+        async function loadVotingData() {
+            try {
+                initializeVotingData();
+
+                // Fetch data from published Google Sheet
+                const response = await fetch(GOOGLE_SHEET_CSV_URL);
+                const csvText = await response.text();
+
+                // Parse CSV data
+                const rows = csvText.split('\n').slice(1); // Skip header row
+
+                rows.forEach(row => {
+                    if (!row.trim()) return;
+
+                    // Split by comma, but handle quoted fields
+                    const columns = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || [];
+
+                    // Clean up quotes from values
+                    const cleanColumns = columns.map(col => col.replace(/^"|"$/g, '').trim());
+
+                    // Expected columns: Timestamp, Category, Contestant, Amount, Votes, Email, Phone, Reference
+                    if (cleanColumns.length < 5) return;
+
+                    const category = cleanColumns[1];
+                    const contestant = cleanColumns[2];
+                    const amount = parseFloat(cleanColumns[3]) || 0;
+                    const votes = parseFloat(cleanColumns[4]) || 0;
+
+                    // Check if this category and contestant exist in our data structure
+                    if (votingData[category] && votingData[category][contestant]) {
+                        votingData[category][contestant].votes += votes;
+                        votingData[category][contestant].amount += amount;
+                    }
+                });
+
+                calculatePercentages();
+                renderVotingUI();
+
+                document.getElementById('loadingSpinner').style.display = 'none';
+                document.getElementById('votingContainer').style.display = 'block';
+
+            } catch (error) {
+                console.error('Error loading voting data:', error);
+
+                // Still show the UI even if data fetch fails
+                initializeVotingData();
+                calculatePercentages();
+                renderVotingUI();
+
+                document.getElementById('loadingSpinner').style.display = 'none';
+                document.getElementById('votingContainer').style.display = 'block';
+            }
+        }
+
+        // Calculate percentages for each category
+        function calculatePercentages() {
+            Object.keys(votingData).forEach(category => {
+                const contestants = votingData[category];
+                const totalVotes = Object.values(contestants).reduce((sum, c) => sum + c.votes, 0);
+
+                Object.keys(contestants).forEach(contestantName => {
+                    if (totalVotes > 0) {
+                        contestants[contestantName].percentage =
+                            ((contestants[contestantName].votes / totalVotes) * 100).toFixed(2);
+                    } else {
+                        contestants[contestantName].percentage = 0;
+                    }
+                });
+            });
+        }
+
+        // Render the voting UI
+        function renderVotingUI() {
+            const container = document.getElementById('votingContainer');
+            container.innerHTML = '';
+
+            Object.keys(contestantsData).forEach(category => {
+                const categorySection = document.createElement('div');
+                categorySection.className = 'category_section';
+
+                let categoryHTML = `
+                    <h2 class="category_title">${category}</h2>
+                    <div class="row">
+                `;
+
+                contestantsData[category].forEach(contestant => {
+                    const voteData = votingData[category][contestant.name];
+                    const percentage = voteData.percentage || 0;
+                    const votes = voteData.votes || 0;
+                    const amount = voteData.amount || 0;
+
+                    categoryHTML += `
+                        <div class="col-lg-6 col-md-6">
+                            <div class="contestant_card">
+                                <h3 class="contestant_name">${contestant.name}</h3>
+                                <div class="vote_stats">
+                                    <div class="progress_bar">
+                                        <div class="progress_fill" style="width: ${percentage}%">
+                                            ${percentage}%
+                                        </div>
+                                    </div>
+                                    <div class="vote_info">
+                                        <span><i class="fa fa-check-circle"></i> ${votes} votes</span>
+                                        <span><i class="fa fa-money"></i> ₦${amount.toLocaleString()}</span>
+                                    </div>
+                                </div>
+                                <button class="vote_btn" onclick="initiateVote('${category}', '${contestant.name}')">
+                                    <i class="fa fa-heart"></i> Vote Now
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                categoryHTML += `</div>`;
+                categorySection.innerHTML = categoryHTML;
+                container.appendChild(categorySection);
+            });
+        }
+
+        // Initiate voting process
+        function initiateVote(category, contestantName) {
+            // Prompt for vote amount
+            const voteCount = prompt(`How many votes for ${contestantName}?\n(Each vote = ₦100)\n\nEnter number of votes:`, '1');
+
+            if (voteCount === null || voteCount === '') {
+                return; // User cancelled
+            }
+
+            const votes = parseInt(voteCount);
+            if (isNaN(votes) || votes < 1) {
+                alert('Please enter a valid number of votes (minimum 1)');
+                return;
+            }
+
+            const amount = votes * 100 * 100; // Convert to kobo (Paystack uses kobo)
+            const amountInNaira = votes * 100;
+
+            // Get voter details
+            const email = prompt('Enter your email address:');
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            const phone = prompt('Enter your phone number:');
+            if (!phone) {
+                alert('Please enter your phone number');
+                return;
+            }
+
+            const voterName = prompt('Enter your name:');
+            if (!voterName) {
+                alert('Please enter your name');
+                return;
+            }
+
+            // Initialize Paystack payment
+            const handler = PaystackPop.setup({
+                key: PAYSTACK_PUBLIC_KEY,
+                email: email,
+                amount: amount,
+                currency: 'NGN',
+                ref: 'DOBA_' + Math.floor((Math.random() * 1000000000) + 1),
+                metadata: {
+                    contestant_name: contestantName,
+                    category: category,
+                    votes: votes,
+                    voter_name: voterName,
+                    phone: phone
+                },
+                callback: function (response) {
+                    alert('Payment successful! Your vote has been recorded.\nReference: ' + response.reference);
+                    // Refresh voting data after successful payment
+                    setTimeout(() => {
+                        loadVotingData();
+                    }, 2000);
+                },
+                onClose: function () {
+                    alert('Payment window closed');
+                }
+            });
+
+            handler.openIframe();
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            loadVotingData();
+
+            // Auto-refresh every 30 seconds
+            setInterval(loadVotingData, 30000);
+        });
+
+        // Initialize SlickNav Mobile Menu
+        $(document).ready(function () {
+            if ($('#navigation').length > 0) {
+                $('#navigation').slicknav({
+                    prependTo: '.mobile_menu',
+                    label: 'MENU',
+                    closeOnClick: true,
+                    allowParentLinks: false,
+                    duplicate: false
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

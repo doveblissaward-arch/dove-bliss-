@@ -263,6 +263,96 @@
             }
         }
         
+        /* Hero Voting Button - Prominent CTA */
+        .hero-voting-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+        }
+        
+        .hero-vote-btn {
+            position: relative;
+            display: inline-block;
+            padding: 25px 50px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.7), 0 0 50px rgba(255, 215, 0, 0.5);
+            border: 3px solid #FFD700;
+            animation: votePulse 2s infinite;
+        }
+        
+        .hero-vote-btn:hover {
+            transform: translateY(-8px) scale(1.08);
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.9), 0 0 80px rgba(255, 215, 0, 0.7);
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .hero-vote-btn .btn-text {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .hero-vote-btn .fa-heart {
+            animation: heartBeat 1.5s infinite;
+        }
+        
+        @keyframes votePulse {
+            0%, 100% {
+                box-shadow: 0 10px 40px rgba(255, 215, 0, 0.7), 0 0 50px rgba(255, 215, 0, 0.5);
+            }
+            50% {
+                box-shadow: 0 15px 50px rgba(255, 215, 0, 0.9), 0 0 70px rgba(255, 215, 0, 0.7);
+            }
+        }
+        
+        @keyframes heartBeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            10%, 30% {
+                transform: scale(1.2);
+            }
+            20%, 40% {
+                transform: scale(1);
+            }
+        }
+        
+        /* Mobile responsive for voting button */
+        @media (max-width: 768px) {
+            .hero-vote-btn {
+                padding: 20px 35px;
+                font-size: 16px;
+                letter-spacing: 1px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-vote-btn {
+                padding: 15px 25px;
+                font-size: 14px;
+                width: 90%;
+                text-align: center;
+            }
+            
+            .hero-vote-btn .btn-text {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+        
         /* About Section Buttons */
         .about-btn:hover {
             background-color: #a9852d !important;
@@ -443,6 +533,7 @@
                             <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                                 <div class="buy_tkt">
                                     <div class="book_btn d-none d-lg-block" style="display: flex; gap: 8px;">
+                                        <a href="voting.html" style="font-size: 0.75em; padding: 6px 12px; background-color: #FF6B6B; color: #fff; border: 1px solid #FF6B6B; border-radius: 4px; font-weight: bold;">🗳️ Vote Now</a>
                                         <a href="tickets.html" style="font-size: 0.75em; padding: 6px 12px; background-color: #FFD700; color: #000; border: 1px solid #FFD700; border-radius: 4px;">Table Reservations</a>
                                         <a href="sponsorship.html" style="font-size: 0.75em; padding: 6px 12px; background-color: #FFD700; color: #000; border: 1px solid #FFD700; border-radius: 4px;">Sponsorship</a>
                                     </div>
@@ -452,6 +543,7 @@
                                 <div class="mobile_menu d-block d-lg-none">
                                     <nav>
                                         <ul id="navigation">
+                                            <li><a href="voting.html">🗳️ Vote Now</a></li>
                                             <li><a href="tickets.html">Table Reservations</a></li>
                                             <li><a href="sponsorship.html">Sponsorship</a></li>
                                         </ul>
@@ -483,6 +575,16 @@
                             <!-- <span class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">2025</span>
                             <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">Dove Bliss Awards</h3>
                             <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">DOBA 2025</p> -->
+                            
+                            <!-- Voting Button -->
+                            <div class="hero-voting-btn wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s" style="margin-top: 30px;">
+                                <a href="voting.html" class="hero-vote-btn">
+                                    <span class="btn-glow"></span>
+                                    <span class="btn-text">
+                                        <i class="fa fa-heart"></i> VOTE NOW FOR YOUR FAVOURITE
+                                    </span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
