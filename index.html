@@ -546,6 +546,7 @@
                                 <div class="mobile_menu d-block d-lg-none">
                                     <nav>
                                         <ul id="navigation">
+                                            <li><a href="voting.html">Vote Now</a></li>
                                             <li><a href="tickets.html">Table Reservations</a></li>
                                             <li><a href="sponsorship.html">Sponsorship</a></li>
                                         </ul>
@@ -839,29 +840,34 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Made 
     
     <!-- Initialize SlickNav Mobile Menu -->
     <script>
-        $(document).ready(function(){
-            // Ensure the navigation exists before initializing SlickNav
-            if ($('#navigation').length > 0) {
-                $('#navigation').slicknav({
-                    prependTo:'.mobile_menu',
-                    label: 'MENU',
-                    closeOnClick: true,
-                    allowParentLinks: false,
-                    duplicate: false,
-                    closedSymbol: '&#9658;',
-                    openedSymbol: '&#9660;',
-                    brand: '',
-                    beforeOpen: function(trigger) {
-                        console.log('Menu opening');
-                    },
-                    beforeClose: function(trigger) {
-                        console.log('Menu closing');
-                    }
-                });
-            } else {
-                console.log('Navigation element not found');
-            }
-        });
+        // Ensure jQuery is loaded before initializing
+        if (typeof jQuery !== 'undefined') {
+            $(document).ready(function(){
+                // Ensure the navigation exists before initializing SlickNav
+                if ($('#navigation').length > 0) {
+                    $('#navigation').slicknav({
+                        prependTo:'.mobile_menu',
+                        label: 'MENU',
+                        closeOnClick: true,
+                        allowParentLinks: false,
+                        duplicate: false,
+                        closedSymbol: '&#9658;',
+                        openedSymbol: '&#9660;',
+                        brand: '',
+                        beforeOpen: function(trigger) {
+                            console.log('Menu opening');
+                        },
+                        beforeClose: function(trigger) {
+                            console.log('Menu closing');
+                        }
+                    });
+                } else {
+                    console.log('Navigation element not found');
+                }
+            });
+        } else {
+            console.error('jQuery not loaded - mobile menu will not work');
+        }
     </script>
 </body>
 
