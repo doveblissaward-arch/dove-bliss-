@@ -310,9 +310,9 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="section_title text-center mb-80">
-                        <h3 class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s" style="color: #D4AF37;">
+                        <h3 style="color: #D4AF37;">
                             Vote for Your Favourite Contestant</h3>
-                        <p class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".4s" style="color: #999;">Each
+                        <p style="color: #999;">Each
                             vote costs ₦100. You can vote multiple times for your favourite contestant.</p>
                     </div>
                 </div>
@@ -374,26 +374,17 @@
     <!-- footer_end -->
 
     <!-- JS here -->
-    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/isotope.pkgd.min.js"></script>
-    <script src="js/ajax-form.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/imagesloaded.pkgd.min.js"></script>
-    <script src="js/scrollIt.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/gijgo.min.js"></script>
-    <script src="js/nice-select.min.js"></script>
-    <script src="js/jquery.slicknav.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/tilt.jquery.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
+    <!-- jQuery from CDN as fallback -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.4.min.js"><\/script>')</script>
+    
+    <!-- Essential scripts only -->
+    <script src="js/popper.min.js" onerror="console.log('Popper failed to load')"></script>
+    <script src="js/bootstrap.min.js" onerror="console.log('Bootstrap failed to load')"></script>
+    <script src="js/jquery.slicknav.min.js" onerror="console.log('SlickNav failed to load')"></script>
+    
+    <!-- Optional enhancement scripts -->
+    <script src="js/wow.min.js" onerror="console.log('WOW failed to load')"></script>
 
     <!-- Paystack Inline JS -->
     <script src="https://js.paystack.co/v1/inline.js"></script>
@@ -636,28 +627,44 @@
             handler.openIframe();
         }
 
-        // Initialize on page load
+        // Initialize on page load with error handling
         document.addEventListener('DOMContentLoaded', function () {
-            loadVotingData();
-
-            // Auto-refresh every 30 seconds
-            setInterval(loadVotingData, 30000);
+            console.log('DOM loaded, initializing voting page...');
+            
+            try {
+                loadVotingData();
+                // Auto-refresh every 30 seconds
+                setInterval(loadVotingData, 30000);
+            } catch (error) {
+                console.error('Error initializing voting data:', error);
+                // Still show UI even if data load fails
+                document.getElementById('loadingSpinner').style.display = 'none';
+                document.getElementById('votingContainer').innerHTML = '<p style="color: white; text-align: center;">Unable to load voting data. Please refresh the page.</p>';
+                document.getElementById('votingContainer').style.display = 'block';
+            }
             
             // Initialize SlickNav Mobile Menu - ensure jQuery is loaded
-            if (typeof jQuery !== 'undefined') {
-                $(document).ready(function () {
-                    // Target only the mobile menu navigation
-                    if ($('#mobile-navigation').length > 0) {
-                        $('#mobile-navigation').slicknav({
-                            prependTo: '.mobile_menu',
-                            label: 'MENU',
-                            closeOnClick: true,
-                            allowParentLinks: false,
-                            duplicate: false
-                        });
+            setTimeout(function() {
+                if (typeof jQuery !== 'undefined' && typeof jQuery.fn.slicknav !== 'undefined') {
+                    try {
+                        // Target only the mobile menu navigation
+                        if ($('#mobile-navigation').length > 0) {
+                            $('#mobile-navigation').slicknav({
+                                prependTo: '.mobile_menu',
+                                label: 'MENU',
+                                closeOnClick: true,
+                                allowParentLinks: false,
+                                duplicate: false
+                            });
+                            console.log('SlickNav initialized successfully');
+                        }
+                    } catch (error) {
+                        console.error('SlickNav initialization failed:', error);
                     }
-                });
-            }
+                } else {
+                    console.warn('jQuery or SlickNav not loaded');
+                }
+            }, 100);
         });
     </script>
 </body>
